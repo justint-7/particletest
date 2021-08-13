@@ -28,7 +28,7 @@ canvas.addEventListener('mouseleave', ()=>{
 })
 
 
-ctx.fillStyle= 'white';
+ctx.fillStyle= 'rgb(255, 165, 0)';
 ctx.font= '20px Verdana';
 ctx.fillText('Cultures Fermented', 00, 40);
 
@@ -53,10 +53,14 @@ class Particle {
         this.density = (Math.random()* 30) + 1;
         this.randomDirectionX = randomDirection(canvas.width)
         this.randomDirectionY = randomDirection(canvas.height)
+        this.r = (Math.random()*255).toString();
+        this.b = (Math.random()*255).toString();
+        this.g = (Math.random()*255).toString();
         
     }
     draw(){
-        ctx.fillStyle = 'red';
+
+        ctx.fillStyle = `rgb(${this.r}, ${this.g}, ${this.b})`;
         ctx.beginPath();
         ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
         ctx.closePath();
