@@ -97,6 +97,11 @@ function addEventListeners(){
     canvas.addEventListener('mousemove', (event)=>{
         getMousePos(canvas, event);
      })
+
+     
+     canvas.addEventListener('touchmove', (event)=>{
+        getMousePos(canvas, event);
+     })
      
      canvas.addEventListener('mouseenter', ()=>{
          active = true;
