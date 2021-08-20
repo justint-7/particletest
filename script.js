@@ -100,6 +100,7 @@ function addEventListeners(){
 
      
      canvas.addEventListener('touchmove', (event)=>{
+         event.preventDefault();
         getMousePos(canvas, event);
      })
      
