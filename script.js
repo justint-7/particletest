@@ -46,8 +46,21 @@ function animate(){
 
 function wrapText(context, text, x, y, maxWidth, lineHeight) {
     let words = text.split(' ');
-    let line = '';
+    // console.log (words);
 
+    // for (let i = 0; i < words.length ; i++ ){
+
+
+    //     // if (words[i].length > 8){
+    //         console.log(words);
+    //     // }
+
+  
+    // }
+
+
+
+    let line = '';
     for(let n = 0; n < words.length; n++) {
         let testLine = line + words[n] + ' ';
         let metrics = context.measureText(testLine);
@@ -66,7 +79,7 @@ function wrapText(context, text, x, y, maxWidth, lineHeight) {
   
   let lineHeight = 20;
   let maxWidth= 95;
-  let wrapX = 0;
+  let wrapX = 47;
   let wrapY = 20
   let text = 'Form Follows Function';
   
@@ -74,9 +87,12 @@ function wrapText(context, text, x, y, maxWidth, lineHeight) {
 
   
 
+  ctx.textAlign = 'center';
 ctx.fillStyle= 'rgb(255, 165, 0)';
 ctx.font= '20px Verdana';
+
 wrapText(ctx, text, wrapX, wrapY, maxWidth, lineHeight);
+
 let textCoordinates = ctx.getImageData(0,0,200,100);
 // ctx.fillText('Form', 00, 40);
 // ctx.fillText('Follows', 00, 60);
@@ -170,7 +186,7 @@ class Particle {
     constructor(x,y){
         this.x = Math.random()*canvas.width;
         this.y = Math.random()*canvas.height;
-        this.size = Math.random()*3;
+        this.size = Math.random()*4;
         this.baseX = x;
         this.baseY = y;
         this.density = (Math.random()* 30) + 1;
@@ -238,6 +254,7 @@ class Particle {
 function init(){
     addEventListeners();
     particleArray = [];    
+    generateParticles();
     generateParticles();
     generateParticles();
     generateParticles();
