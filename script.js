@@ -44,21 +44,41 @@ function animate(){
     requestAnimationFrame(animate);
 }
 
-function wrapText(context, text, x, y, maxWidth, lineHeight) {
+class Line {
+    constructor(line,x,y){
+        this.line = line;
+        this.x = x;
+        this.y = y;
+    }
+}
+
+function wrapText(context, text, x, wrapY, maxWidth, lineHeight) {
     let words = text.split(' ');
+    let wrapArray = [];
     // console.log (words);
-
     // for (let i = 0; i < words.length ; i++ ){
-
-
     //     // if (words[i].length > 8){
     //         console.log(words);
     //     // }
-
-  
     // }
 
 
+    // let line = '';
+    // for(let n = 0; n < words.length; n++) {
+    //     let testLine = line + words[n] + ' ';
+    //     let metrics = context.measureText(testLine);
+    //     let testWidth = metrics.width;
+    //     if (testWidth > maxWidth && n > 0) {
+    //         context.fillText(line, x, y);
+    //         line = words[n] + ' ';
+    //         y += lineHeight;
+    //     }
+    //     else {
+    //         line = testLine;
+    //     }
+    // }
+    // context.fillText(line, x, y);
+ 
 
     let line = '';
     for(let n = 0; n < words.length; n++) {
@@ -66,27 +86,31 @@ function wrapText(context, text, x, y, maxWidth, lineHeight) {
         let metrics = context.measureText(testLine);
         let testWidth = metrics.width;
         if (testWidth > maxWidth && n > 0) {
-            context.fillText(line, x, y);
+            wrapArray.push(new Line(line,x,wrapY));
             line = words[n] + ' ';
-            y += lineHeight;
+            wrapY += lineHeight;
         }
         else {
             line = testLine;
         }
     }
-    context.fillText(line, x, y);
+    wrapArray.push(new Line(line,x,wrapY));
+
+    wrapArray.forEach(element => {
+        element.y= element.y + 35 - (wrapArray.length*lineHeight)/2
+        context.fillText(element.line, element.x, element.y)              
+    });
+
+
   }
+  
+
   
   let lineHeight = 20;
   let maxWidth= 95;
   let wrapX = 47;
   let wrapY = 20
   let text = 'Form Follows Function';
-  
-
-
-  
-
   ctx.textAlign = 'center';
 ctx.fillStyle= 'rgb(255, 165, 0)';
 ctx.font= '20px Verdana';
@@ -138,6 +162,7 @@ function addEventListeners(){
     })
 
      input = document.getElementById("formFollowsInput");
+     
 
      input.addEventListener('input',()=>{
          const positionArray = [];
@@ -179,7 +204,6 @@ function randomDirection(max){
     } else return -(Math.random()*max)
 
 }
-
 
 
 class Particle {
